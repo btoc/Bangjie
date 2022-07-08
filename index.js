@@ -62,8 +62,7 @@ exports.fetchUserByNameAndUsersCompany = async (str, services) => {
 			user = item
 		}
 	})
-	const company = await fetchCompanyById(user.companyId)
-	const status = await fetchStatus()
+	const [company, status] = await Promise.all([fetchCompanyById(user.companyId),fetchStatus()])
 	return{
 		company,
 		status,
